@@ -1,0 +1,58 @@
+ASSIGNMENT-2 (BY AYUSHREE SHARMA)
+
+1. select c.CountryName, co.Continent from Countries c inner join Continents co on c.Continent = co.ContID order by co.Continent ;
+2. select co.Continent, COUNT(c.CountryID) from Countries c inner join continents co on c.Continent=co.ContID group by co.Continent;
+3. select c.CountryName from Countries c left join Car_Makers cm on c.CountryID = cm.Country where cm.Country is null;
+4. select cm.Maker, cm.FullName from Car_Makers cm inner join Countries c on cm.Country = c.CountryID where c.CountryName = 'JAPAN';
+5. select cm.Maker, cm.FullName from Car_Makers cm inner join Countries c on cm.Country = c.CountryID where c.CountryName = 'France' or c.CountryName = 'USA'; 
+6. select c.CountryName, co.Continent from Car_Makers cm inner join Countries c on cm.Country = c.CountryID inner join Continents co on c.Continent = co.ContID where cm.FullName = 'Volvo';
+7. select md.Model from Model_Details md inner join Car_Makers cm on md.Maker = cm.ID where cm.FullName = 'Ford Motor Company';
+8. select COUNT(md.Model) from Model_Details md inner join Car_Makers cm on md.Maker = cm.ID inner join Countries c on cm.Country = c.CountryID where c.CountryName = 'Germany';
+9. select md.Model, cm.Maker, cm.FullName from Model_Details md inner join Car_Makers cm on md.Maker = cm.ID inner join Countries c on cm.Country = c.CountryID where c.CountryName = 'Japan';
+11.select year, COUNT(ID) from Car_Details group by year order by COUNT(ID) desc;
+12.select year, COUNT(ID) from Car_Details group by year order by COUNT(ID);
+13.(a)select year, min(mpg),max(mpg),round(avg(mpg),2) from Car_Details group by year;
+   (b)select year,min(cylinders),max(cylinders),round(avg(cylinders),2) from Car_Details group by year;
+   (c)select year,min(edispl),max(edispl),round(avg(edispl),2) from Car_Details group by year;
+   (d)select year,min(horsepower),max(horsepower),round(avg(horsepower),2) from Car_Details group by year;
+   (e)select year,min(weight),max(weight),round(avg(weight),2) from Car_Details group by year;
+   (f)select year,min(accel),max(accel),round(avg(accel),2) from Car_Details group by year;
+14.(a)select avg(horsepower), median(horsepower), round(stddev(horsepower),2) from Car_Details;
+   (b)select round(avg(weight),2), median(weight), round(stddev(weight),2) from Car_Details;
+   (c)select round(avg(accel),2), median(accel), round(stddev(accel),2) from Car_Details;
+15.TABLES INFO GIVEN BELOW:-	
+   1)Continents:
+   .ContID (Primary Key)
+   .Continent
+
+   2)Countries:
+   .CountryID (Primary Key)
+   .CountryName
+
+   3)Continent (Foreign Key referencing Continents.ContID)
+   .Car_Makers:
+   .ID (Primary Key)
+   .Maker
+   .FullName
+   .Country (Foreign Key referencing Countries.CountryID)
+    
+   4)Model_Details:
+   .ModelID (Primary Key)
+   .Maker (Foreign Key referencing Car_Makers.ID)
+   .Model
+    
+   5)Car_Names:
+   .ID (Primary Key)
+   .Model (Foreign Key referencing Model_Details.Model)
+   .Descr
+
+   6)Car_Details:
+   .ID (Primary Key)
+   .mpg
+   .cylinders
+   .edispl
+   .horsepower
+   .weight
+   .accel
+   .year
+   .ID (Foreign Key referencing Car_Names.ID)
