@@ -1,0 +1,58 @@
+ASSIGNMENT-3 (BY AYUSHREE SHARMA)
+
+
+1.select c.customer_id,c.cust_first_name, c.cust_last_name, sum(o.order_total) 
+  from demo_customers c
+  join demo_orders o on c.customer_id = o.customer_id
+  group by c.customer_id, c.cust_last_name, c.cust_first_name
+  order by 4 desc
+  fetch first 3 rows only;
+
+2.select c.customer_id, c.cust_first_name, c.cust_last_name, count(o.order_id)
+  from demo_customers c
+  join demo_orders o on c.customer_id = o.customer_id
+  group by c.customer_id, c.cust_last_name,c.cust_first_name
+  order by 4 desc
+  fetch first 3 rows only;
+
+3.select p.product_id, p.product_name, sum(oi.quantity)
+  from demo_products p
+  join demo_order_items oi on p.product_id = oi.product_id
+  group by p.product_id, p.product_name
+  order by 3 desc
+  fetch first 3 rows only;
+
+4.select c.cust_last_name, p.product_name, sum(oi.quantity) 
+  from demo_customers c
+  join demo_orders o on c.customer_id = o.customer_id
+  join demo_order_items oi on o.order_id = oi.order_id
+  join demo_products p on oi.product_id = p.product_id
+  group by c.cust_last_name, p.product_name;
+
+
+6.select extract(year from o.order_timestamp) , count(o.order_id) 
+  from demo_orders o
+  group by extract(year from o.order_timestamp)
+  order by count(o.order_id) desc
+  fetch first 1 rows only;
+
+8.select p.category, sum(oi.quantity) 
+  from demo_products p
+  join demo_order_items oi on p.product_id = oi.product_id
+  group by p.category
+  order by sum(oi.quantity) desc
+  fetch first 1 rows only;
+
+9.select p.category, sum(oi.quantity) 
+  from demo_products p
+  join demo_order_items oi on p.product_id = oi.product_id
+  group by p.category
+  order by sum(oi.quantity) desc
+  offset 1 rows fetch first 1 row only;
+
+10.select c.cust_last_name, p.product_name, sum(oi.quantity)
+  from demo_customers c
+  join demo_orders o on c.customer_id = o.customer_id
+  join demo_order_items oi on o.order_id = oi.order_id
+  join demo_products p on oi.product_id = p.product_id
+  group by rollup (c.cust_last_name, p.product_name);
